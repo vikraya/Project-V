@@ -48,15 +48,26 @@ class _LoginScreenState extends State<LoginScreen> {
                 'or',
                 style: TextStyle(
                   fontSize: 17,
+                  color: Pallete.whiteColor,
                 ),
               ),
               const SizedBox(height: 15),
               LoginField(
-                  hintText: 'Email',
-                  controller: _useridController,
-                  keyboardType: TextInputType.emailAddress,
-                  prefixIcon: const Icon(Icons.email_outlined),
-                  obscureText: false),
+                hintText: 'Email',
+                controller: _useridController,
+                keyboardType: TextInputType.emailAddress,
+                prefixIcon: const Icon(Icons.email_outlined),
+                obscureText: false,
+                suffixIcon: null,
+                validator: (value) {
+                  if (value!.isEmpty ||
+                      !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*|+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                          .hasMatch(value)) {
+                    return " Enter a valid email!";
+                  }
+                  return null;
+                },
+              ),
               const SizedBox(height: 15),
               LoginField(
                 hintText: 'Password',
@@ -69,6 +80,19 @@ class _LoginScreenState extends State<LoginScreen> {
                       : Icons.visibility),
                 ),
                 obscureText: _isPasswordVisible,
+                validator: (value) {
+                  RegExp regex = RegExp(
+                      r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{6,}$');
+                  if (value!.isEmpty) {
+                    return 'Please enter password';
+                  } else {
+                    if (!regex.hasMatch(value)) {
+                      return 'Enter valid password';
+                    } else {
+                      return null;
+                    }
+                  }
+                },
               ),
               const SizedBox(height: 20),
               const GradientButton(),

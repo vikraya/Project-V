@@ -10,11 +10,16 @@ class LoginField extends StatefulWidget {
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final bool obscureText;
+  final String? Function(String?)? validator;
   const LoginField({
     super.key,
     required this.hintText,
     required this.controller,
-    this.keyboardType, this.suffixIcon, this.prefixIcon, required this.obscureText,
+    this.keyboardType,
+    this.suffixIcon,
+    this.prefixIcon,
+    required this.obscureText,
+    required this.validator,
   });
 
   @override
@@ -33,26 +38,32 @@ class _LoginFieldState extends State<LoginField> {
         keyboardType: widget.keyboardType,
         obscureText: widget.obscureText,
         decoration: InputDecoration(
-          contentPadding: const EdgeInsets.all(27),
-          enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(
-              color: Pallete.borderColor,
-              width: 3,
+            contentPadding: const EdgeInsets.all(27),
+            enabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                color: Pallete.borderColor,
+                width: 3,
+              ),
+              borderRadius: BorderRadius.circular(10),
             ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(
-              color: Pallete.gradient2,
-              width: 3,
+            focusedBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                color: Pallete.gradient2,
+                width: 3,
+              ),
+              borderRadius: BorderRadius.circular(10),
             ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          hintText: widget.hintText,
-          suffixIcon: widget.suffixIcon,
-          prefixIcon: widget.prefixIcon,
-          
-        ),
+            hintText: widget.hintText,
+            suffixIcon: widget.suffixIcon,
+            prefixIcon: widget.prefixIcon,
+            errorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                color: Colors.red,
+                width: 3,
+              ),
+              borderRadius: BorderRadius.circular(10),
+            )),
+        validator: widget.validator,
       ),
     );
   }
