@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:vikraya/repository/screens/auth/pallete.dart';
 
 class GradientButton extends StatefulWidget {
-  const GradientButton({super.key});
+  const GradientButton({
+    super.key,
+    required onPressed,
+  });
 
   @override
   State<GradientButton> createState() => _GradientButtonState();
@@ -10,7 +13,9 @@ class GradientButton extends StatefulWidget {
 
 class _GradientButtonState extends State<GradientButton> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     return Container(
       decoration: BoxDecoration(
         gradient: const LinearGradient(
@@ -27,12 +32,12 @@ class _GradientButtonState extends State<GradientButton> {
       child: ElevatedButton(
         onPressed: () {},
         style: ElevatedButton.styleFrom(
-          fixedSize: const Size(395, 55),
+          fixedSize: const Size(250, 55),
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
         ),
         child: const Text(
-          'Sign in',
+          " Next >>",
           style: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 17,

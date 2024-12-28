@@ -32,31 +32,29 @@ class _LoginScreenState extends State<LoginScreen> {
                   Center(
                     child: Image.asset(
                       "assets/img/main_page/V_O_n_C_Logo crop-min.png",
-                      height: 100,
-                      width: 150,
+                      height: 80,
+                      width: 80,
                     ),
                   ),
                   const Text(
-                    'Sign in.',
+                    'Sign in',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 50,
+                      fontSize: 20,
                       color: Pallete.whiteColor,
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
-              const SocialButton(
-                  iconPath: 'assets/svgs/g_logo.svg',
-                  label: 'Continue with Google'),
-              const SizedBox(height: 20),
-              const SocialButton(
-                iconPath: 'assets/svgs/f_logo.svg',
-                label: 'Continue with Facebook',
-                horizontalPadding: 90,
+              const SizedBox(height: 10),
+              SocialButton(
+                iconPath: 'assets/svgs/g_logo.svg',
+                label: 'Continue with Google',
+                horizontalPadding: 30,
+                verticalPadding: 5,
+                onPressed: () {},
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 11),
               const Text(
                 'or',
                 style: TextStyle(
@@ -64,13 +62,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Pallete.whiteColor,
                 ),
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 11),
               LoginField(
+                height: 30,
+                width: 150,
                 hintText: 'Email',
+                hintTextStyle: TextStyle(color: Pallete.whiteColor),
                 hintStyle: const TextStyle(color: Pallete.whiteColor),
                 controller: _useridController,
                 keyboardType: TextInputType.emailAddress,
-                prefixIcon: const Icon(Icons.email_outlined),
+                prefixIcon:
+                    const Icon(Icons.email_outlined, color: Pallete.whiteColor),
                 obscureText: false,
                 suffixIcon: null,
                 validator: (value) {
@@ -82,21 +84,28 @@ class _LoginScreenState extends State<LoginScreen> {
                   return null;
                 },
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 10),
               LoginField(
+                height: 20,
+                width: 150,
                 hintText: 'Password',
+                hintTextStyle: const TextStyle(color: Pallete.whiteColor),
                 hintStyle: const TextStyle(color: Pallete.whiteColor),
                 controller: _passwordController,
                 keyboardType: TextInputType.visiblePassword,
+                prefixIcon: const Icon(Icons.lock, color: Pallete.whiteColor),
                 suffixIcon: IconButton(
                   onPressed: () {
                     setState(() {
                       _isPasswordVisible = !_isPasswordVisible;
                     });
                   },
-                  icon: Icon(_isPasswordVisible
-                      ? Icons.visibility_off
-                      : Icons.visibility),
+                  icon: Icon(
+                    _isPasswordVisible
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                  ),
+                  color: Pallete.whiteColor,
                 ),
                 obscureText: _isPasswordVisible,
                 validator: (value) {
@@ -113,8 +122,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   }
                 },
               ),
-              const SizedBox(height: 20),
-              Row(
+              const SizedBox(height: 10),
+              Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   InkWell(
@@ -135,6 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
+                  const SizedBox(height: 10),
                   InkWell(
                     onTap: () {},
                     child: const Text(
@@ -147,8 +157,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
-              const GradientButton(),
+              const SizedBox(height: 10),
+              GradientButton(
+                onPressed: () {},
+              ),
             ],
           ),
         ),

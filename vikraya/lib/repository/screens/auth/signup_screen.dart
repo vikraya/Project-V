@@ -32,26 +32,30 @@ class _SignupScreenState extends State<SignupScreen> {
                 children: [
                   Image.asset(
                     'assets/img/main_page/V_O_n_C_Logo crop-min.png',
-                    height: 150,
-                    width: 150,
+                    height: 80,
+                    width: 80,
                   ),
                   const Text(
                     'Sign Up',
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Pallete.whiteColor,
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               LoginField(
+                height: 50,
+                width: 300,
                 hintText: 'Email',
+                hintTextStyle: const TextStyle(color: Pallete.whiteColor),
                 hintStyle: const TextStyle(color: Pallete.whiteColor),
                 controller: _emailcontroller,
                 keyboardType: TextInputType.emailAddress,
-                prefixIcon: const Icon(Icons.email_outlined),
+                prefixIcon:
+                    const Icon(Icons.email_outlined, color: Pallete.whiteColor),
                 suffixIcon: null,
                 obscureText: false,
                 validator: (value) {
@@ -63,17 +67,22 @@ class _SignupScreenState extends State<SignupScreen> {
                   return null;
                 },
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               LoginField(
+                height: 50,
+                width: 300,
                 hintText: 'Password',
+                hintTextStyle: const TextStyle(color: Pallete.whiteColor),
                 hintStyle: const TextStyle(color: Pallete.whiteColor),
                 controller: _passwordcontroller,
                 keyboardType: TextInputType.visiblePassword,
-                prefixIcon: const Icon(Icons.lock),
+                prefixIcon: const Icon(Icons.lock, color: Pallete.whiteColor),
                 suffixIcon: IconButton(
-                  icon: Icon(_isPasswordVisible
-                      ? Icons.visibility_off
-                      : Icons.visibility),
+                  icon: Icon(
+                    _isPasswordVisible
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                  ),
                   color: Pallete.whiteColor,
                   onPressed: () {
                     setState(() {
@@ -96,13 +105,16 @@ class _SignupScreenState extends State<SignupScreen> {
                   }
                 },
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               LoginField(
+                height: 50,
+                width: 300,
                 hintText: 'Confirm Password',
+                hintTextStyle: const TextStyle(color: Pallete.whiteColor),
                 hintStyle: const TextStyle(color: Pallete.whiteColor),
                 controller: _confirmpasswordcontroller,
                 keyboardType: TextInputType.visiblePassword,
-                prefixIcon: const Icon(Icons.lock),
+                prefixIcon: const Icon(Icons.lock, color: Pallete.whiteColor),
                 suffixIcon: IconButton(
                   icon: Icon(_isPasswordVisible
                       ? Icons.visibility_off
@@ -128,13 +140,16 @@ class _SignupScreenState extends State<SignupScreen> {
                   return null;
                 },
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               LoginField(
+                height: 50,
+                width: 300,
                 hintText: 'Phone',
+                hintTextStyle: const TextStyle(color: Pallete.whiteColor),
                 hintStyle: const TextStyle(color: Pallete.whiteColor),
                 controller: phonecontroller,
                 keyboardType: TextInputType.phone,
-                prefixIcon: const Icon(Icons.phone),
+                prefixIcon: const Icon(Icons.phone, color: Pallete.whiteColor),
                 suffixIcon: null,
                 obscureText: false,
                 validator: (value) {
@@ -144,11 +159,12 @@ class _SignupScreenState extends State<SignupScreen> {
                   return null;
                 },
               ),
-              const SizedBox(height: 20),
-              const GradientButton(),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              const SizedBox(height: 10),
+              GradientButton(
+                onPressed: () {},
+              ),
+              const SizedBox(height: 10),
+              Column(
                 children: [
                   InkWell(
                     onTap: () {
@@ -168,6 +184,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                     ),
                   ),
+                  const SizedBox(height: 10),
                 ],
               ),
             ],

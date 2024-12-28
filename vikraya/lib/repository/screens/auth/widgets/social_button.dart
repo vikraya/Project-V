@@ -10,7 +10,7 @@ class SocialButton extends StatefulWidget {
     Key? key,
     required this.iconPath,
     required this.label,
-    this.horizontalPadding = 100,
+    this.horizontalPadding = 100, required Null Function() onPressed, required int verticalPadding,
   }) : super(key: key);
 
   @override

@@ -22,6 +22,9 @@ class LoginField extends StatefulWidget {
     required this.obscureText,
     required this.validator,
     this.hintStyle,
+    required int width,
+    required int height,
+    required TextStyle hintTextStyle,
   });
 
   @override
@@ -33,7 +36,8 @@ class _LoginFieldState extends State<LoginField> {
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: const BoxConstraints(
-        maxWidth: 400,
+        maxWidth: 250,
+        maxHeight: 100,
       ),
       child: TextFormField(
         controller: widget.controller,
