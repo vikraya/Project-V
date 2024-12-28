@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:vikraya/repository/screens/auth/pallete.dart';
 
-class GradientButton extends StatelessWidget {
-  const GradientButton({Key? key}) : super(key: key);
+class GradientButton extends StatefulWidget {
+  const GradientButton({super.key});
 
+  @override
+  State<GradientButton> createState() => _GradientButtonState();
+}
+
+class _GradientButtonState extends State<GradientButton> {
   @override
   Widget build(BuildContext context) {
     return Container(

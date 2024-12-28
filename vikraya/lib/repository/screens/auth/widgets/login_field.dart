@@ -1,13 +1,27 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
 import 'package:vikraya/repository/screens/auth/pallete.dart';
 
-class LoginField extends StatelessWidget {
+class LoginField extends StatefulWidget {
   final String hintText;
+  final TextEditingController controller;
+  final TextInputType? keyboardType;
+  final Widget? suffixIcon;
+  final Widget? prefixIcon;
+  final bool obscureText;
   const LoginField({
-    Key? key,
+    super.key,
     required this.hintText,
-  }) : super(key: key);
+    required this.controller,
+    this.keyboardType, this.suffixIcon, this.prefixIcon, required this.obscureText,
+  });
 
+  @override
+  State<LoginField> createState() => _LoginFieldState();
+}
+
+class _LoginFieldState extends State<LoginField> {
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
@@ -15,6 +29,9 @@ class LoginField extends StatelessWidget {
         maxWidth: 400,
       ),
       child: TextFormField(
+        controller: widget.controller,
+        keyboardType: widget.keyboardType,
+        obscureText: widget.obscureText,
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.all(27),
           enabledBorder: OutlineInputBorder(
@@ -31,7 +48,10 @@ class LoginField extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(10),
           ),
-          hintText: hintText,
+          hintText: widget.hintText,
+          suffixIcon: widget.suffixIcon,
+          prefixIcon: widget.prefixIcon,
+          
         ),
       ),
     );
