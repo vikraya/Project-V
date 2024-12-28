@@ -11,6 +11,7 @@ class LoginField extends StatefulWidget {
   final Widget? prefixIcon;
   final bool obscureText;
   final String? Function(String?)? validator;
+  final TextStyle? hintStyle;
   const LoginField({
     super.key,
     required this.hintText,
@@ -20,6 +21,7 @@ class LoginField extends StatefulWidget {
     this.prefixIcon,
     required this.obscureText,
     required this.validator,
+    this.hintStyle,
   });
 
   @override
@@ -64,6 +66,7 @@ class _LoginFieldState extends State<LoginField> {
               borderRadius: BorderRadius.circular(10),
             )),
         validator: widget.validator,
+        style: widget.hintStyle,
       ),
     );
   }

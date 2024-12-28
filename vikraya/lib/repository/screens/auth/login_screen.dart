@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vikraya/repository/screens/auth/pallete.dart';
+import 'package:vikraya/repository/screens/auth/signup_screen.dart';
 import 'package:vikraya/repository/screens/auth/widgets/gradient_button.dart';
 import 'package:vikraya/repository/screens/auth/widgets/login_field.dart';
 import 'package:vikraya/repository/screens/auth/widgets/social_button.dart';
@@ -14,8 +15,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _useridController = TextEditingController();
   final _passwordController = TextEditingController();
-  final bool _isPasswordVisible = true;
-  bool _isLoginButtonEnabled = false;
+  bool _isPasswordVisible = true;
+  bool _isLoginEnabled = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,15 +26,27 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             children: [
               Image.asset('assets/images/signin_balls.png'),
-              const Text(
-                'Sign in.',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 50,
-                  color: Pallete.whiteColor,
-                ),
+              const SizedBox(height: 20),
+              Column(
+                children: [
+                  Center(
+                    child: Image.asset(
+                      "assets/img/main_page/V_O_n_C_Logo crop-min.png",
+                      height: 100,
+                      width: 150,
+                    ),
+                  ),
+                  const Text(
+                    'Sign in.',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 50,
+                      color: Pallete.whiteColor,
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 20),
               const SocialButton(
                   iconPath: 'assets/svgs/g_logo.svg',
                   label: 'Continue with Google'),
@@ -54,6 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 15),
               LoginField(
                 hintText: 'Email',
+                hintStyle: const TextStyle(color: Pallete.whiteColor),
                 controller: _useridController,
                 keyboardType: TextInputType.emailAddress,
                 prefixIcon: const Icon(Icons.email_outlined),
@@ -71,10 +85,15 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 15),
               LoginField(
                 hintText: 'Password',
+                hintStyle: const TextStyle(color: Pallete.whiteColor),
                 controller: _passwordController,
                 keyboardType: TextInputType.visiblePassword,
                 suffixIcon: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      _isPasswordVisible = !_isPasswordVisible;
+                    });
+                  },
                   icon: Icon(_isPasswordVisible
                       ? Icons.visibility_off
                       : Icons.visibility),
@@ -93,6 +112,40 @@ class _LoginScreenState extends State<LoginScreen> {
                     }
                   }
                 },
+              ),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        _isLoginEnabled = true;
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignupScreen()));
+                      });
+                    },
+                    child: const Text(
+                      "Don't have an account? Signup",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Pallete.whiteColor,
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {},
+                    child: const Text(
+                      'Forgot Password?',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Pallete.whiteColor,
+                      ),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 20),
               const GradientButton(),
