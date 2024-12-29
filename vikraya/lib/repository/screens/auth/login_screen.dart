@@ -19,149 +19,151 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _isLoginEnabled = false;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Pallete.backgroundColor,
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              Image.asset('assets/images/signin_balls.png'),
-              const SizedBox(height: 20),
-              Column(
-                children: [
-                  Center(
-                    child: Image.asset(
-                      "assets/img/main_page/V_O_n_C_Logo crop-min.png",
-                      height: 80,
-                      width: 80,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Pallete.backgroundColor,
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              children: [
+                Image.asset('assets/images/signin_balls.png'),
+                const SizedBox(height: 20),
+                Column(
+                  children: [
+                    Center(
+                      child: Image.asset(
+                        "assets/img/main_page/V_O_n_C_Logo crop-min.png",
+                        height: 80,
+                        width: 80,
+                      ),
                     ),
-                  ),
-                  const Text(
-                    'Sign in',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Pallete.whiteColor,
+                    const Text(
+                      'Sign in',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Pallete.whiteColor,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
-              SocialButton(
-                iconPath: 'assets/svgs/g_logo.svg',
-                label: 'Continue with Google',
-                horizontalPadding: 30,
-                verticalPadding: 5,
-                onPressed: () {},
-              ),
-              const SizedBox(height: 11),
-              const Text(
-                'or',
-                style: TextStyle(
-                  fontSize: 17,
-                  color: Pallete.whiteColor,
+                  ],
                 ),
-              ),
-              const SizedBox(height: 11),
-              LoginField(
-                height: 30,
-                width: 150,
-                hintText: 'Email',
-                hintTextStyle: TextStyle(color: Pallete.whiteColor),
-                hintStyle: const TextStyle(color: Pallete.whiteColor),
-                controller: _useridController,
-                keyboardType: TextInputType.emailAddress,
-                prefixIcon:
-                    const Icon(Icons.email_outlined, color: Pallete.whiteColor),
-                obscureText: false,
-                suffixIcon: null,
-                validator: (value) {
-                  if (value!.isEmpty ||
-                      !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*|+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                          .hasMatch(value)) {
-                    return " Enter a valid email!";
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 10),
-              LoginField(
-                height: 20,
-                width: 150,
-                hintText: 'Password',
-                hintTextStyle: const TextStyle(color: Pallete.whiteColor),
-                hintStyle: const TextStyle(color: Pallete.whiteColor),
-                controller: _passwordController,
-                keyboardType: TextInputType.visiblePassword,
-                prefixIcon: const Icon(Icons.lock, color: Pallete.whiteColor),
-                suffixIcon: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      _isPasswordVisible = !_isPasswordVisible;
-                    });
-                  },
-                  icon: Icon(
-                    _isPasswordVisible
-                        ? Icons.visibility_off
-                        : Icons.visibility,
-                  ),
-                  color: Pallete.whiteColor,
+                const SizedBox(height: 10),
+                SocialButton(
+                  iconPath: 'assets/svgs/g_logo.svg',
+                  label: 'Continue with Google',
+                  horizontalPadding: 30,
+                  verticalPadding: 5,
+                  onPressed: () {},
                 ),
-                obscureText: _isPasswordVisible,
-                validator: (value) {
-                  RegExp regex = RegExp(
-                      r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{6,}$');
-                  if (value!.isEmpty) {
-                    return 'Please enter password';
-                  } else {
-                    if (!regex.hasMatch(value)) {
-                      return 'Enter valid password';
-                    } else {
-                      return null;
+                const SizedBox(height: 11),
+                const Text(
+                  'or',
+                  style: TextStyle(
+                    fontSize: 17,
+                    color: Pallete.whiteColor,
+                  ),
+                ),
+                const SizedBox(height: 11),
+                LoginField(
+                  height: 30,
+                  width: 150,
+                  hintText: 'Email',
+                  hintTextStyle: TextStyle(color: Pallete.whiteColor),
+                  hintStyle: const TextStyle(color: Pallete.whiteColor),
+                  controller: _useridController,
+                  keyboardType: TextInputType.emailAddress,
+                  prefixIcon:
+                      const Icon(Icons.email_outlined, color: Pallete.whiteColor),
+                  obscureText: false,
+                  suffixIcon: null,
+                  validator: (value) {
+                    if (value!.isEmpty ||
+                        !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*|+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                            .hasMatch(value)) {
+                      return " Enter a valid email!";
                     }
-                  }
-                },
-              ),
-              const SizedBox(height: 10),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  InkWell(
-                    onTap: () {
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 10),
+                LoginField(
+                  height: 20,
+                  width: 150,
+                  hintText: 'Password',
+                  hintTextStyle: const TextStyle(color: Pallete.whiteColor),
+                  hintStyle: const TextStyle(color: Pallete.whiteColor),
+                  controller: _passwordController,
+                  keyboardType: TextInputType.visiblePassword,
+                  prefixIcon: const Icon(Icons.lock, color: Pallete.whiteColor),
+                  suffixIcon: IconButton(
+                    onPressed: () {
                       setState(() {
-                        _isLoginEnabled = true;
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const SignupScreen()));
+                        _isPasswordVisible = !_isPasswordVisible;
                       });
                     },
-                    child: const Text(
-                      "Don't have an account? Signup",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Pallete.whiteColor,
+                    icon: Icon(
+                      _isPasswordVisible
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                    ),
+                    color: Pallete.whiteColor,
+                  ),
+                  obscureText: _isPasswordVisible,
+                  validator: (value) {
+                    RegExp regex = RegExp(
+                        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{6,}$');
+                    if (value!.isEmpty) {
+                      return 'Please enter password';
+                    } else {
+                      if (!regex.hasMatch(value)) {
+                        return 'Enter valid password';
+                      } else {
+                        return null;
+                      }
+                    }
+                  },
+                ),
+                const SizedBox(height: 10),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          _isLoginEnabled = true;
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SignupScreen()));
+                        });
+                      },
+                      child: const Text(
+                        "Don't have an account? Signup",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Pallete.whiteColor,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 10),
-                  InkWell(
-                    onTap: () {},
-                    child: const Text(
-                      'Forgot Password?',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Pallete.whiteColor,
+                    const SizedBox(height: 10),
+                    InkWell(
+                      onTap: () {},
+                      child: const Text(
+                        'Forgot Password?',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Pallete.whiteColor,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
-              GradientButton(
-                onPressed: () {},
-              ),
-            ],
+                  ],
+                ),
+                const SizedBox(height: 10),
+                GradientButton(
+                  onPressed: () {},
+                ),
+              ],
+            ),
           ),
         ),
       ),
