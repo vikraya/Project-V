@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vikraya/repository/screens/auth/pallete.dart';
+import 'package:vikraya/repository/screens/main_screen.dart';
 
 class GradientButton extends StatefulWidget {
   const GradientButton({
@@ -30,7 +31,10 @@ class _GradientButtonState extends State<GradientButton> {
         borderRadius: BorderRadius.circular(7),
       ),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => MainScreen()));
+        },
         style: ElevatedButton.styleFrom(
           fixedSize: const Size(250, 55),
           backgroundColor: Colors.transparent,
