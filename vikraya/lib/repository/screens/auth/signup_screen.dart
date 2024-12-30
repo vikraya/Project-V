@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:vikraya/repository/screens/auth/epn_conformation_screen.dart';
 import 'package:vikraya/repository/screens/auth/login_screen.dart';
 import 'package:vikraya/repository/screens/auth/pallete.dart';
 import 'package:vikraya/repository/screens/auth/widgets/gradient_button.dart';
 import 'package:vikraya/repository/screens/auth/widgets/login_field.dart';
+import 'package:vikraya/services/auth_service.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -15,9 +17,49 @@ class _SignupScreenState extends State<SignupScreen> {
   final _emailcontroller = TextEditingController();
   final _passwordcontroller = TextEditingController();
   final _confirmpasswordcontroller = TextEditingController();
-  final phonecontroller = TextEditingController();
+  final _phonecontroller = TextEditingController();
   bool _isPasswordVisible = true;
   bool _isLoginEnabled = false;
+
+  void signup(String email , String password, String confirmPassword, String phone) async {
+    if(email.isEmpty || password.isEmpty || confirmPassword.isEmpty || phone.isEmpty){
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("fill all the fields")),
+      );
+      return;
+    }
+    
+    AuthService authService = AuthService('http://localhost:8000');
+    try {
+      final response = await authService.signUp(email, password, confirmPassword, phone);
+      if (!mounted) return; // Ensure widget is still in the tree
+      if (response['message'] == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Unexpected error occurred. Please try again.")),
+        );
+        return;
+      }
+      
+      if (response['message'] == "User signup successful") {
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   SnackBar(content: Text("Signup successful!")),
+        // );
+         Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => EpnConformationScreen(
+            email: email,
+          )),
+        );
+      }else{
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(response['message'])),
+        );
+      }
+    } catch (e) { 
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -51,7 +93,6 @@ class _SignupScreenState extends State<SignupScreen> {
                   height: 50,
                   width: 300,
                   hintText: 'Email',
-                  hintTextStyle: const TextStyle(color: Pallete.whiteColor),
                   hintStyle: const TextStyle(color: Pallete.whiteColor),
                   controller: _emailcontroller,
                   keyboardType: TextInputType.emailAddress,
@@ -73,7 +114,6 @@ class _SignupScreenState extends State<SignupScreen> {
                   height: 50,
                   width: 300,
                   hintText: 'Password',
-                  hintTextStyle: const TextStyle(color: Pallete.whiteColor),
                   hintStyle: const TextStyle(color: Pallete.whiteColor),
                   controller: _passwordcontroller,
                   keyboardType: TextInputType.visiblePassword,
@@ -111,7 +151,6 @@ class _SignupScreenState extends State<SignupScreen> {
                   height: 50,
                   width: 300,
                   hintText: 'Confirm Password',
-                  hintTextStyle: const TextStyle(color: Pallete.whiteColor),
                   hintStyle: const TextStyle(color: Pallete.whiteColor),
                   controller: _confirmpasswordcontroller,
                   keyboardType: TextInputType.visiblePassword,
@@ -146,9 +185,8 @@ class _SignupScreenState extends State<SignupScreen> {
                   height: 50,
                   width: 300,
                   hintText: 'Phone',
-                  hintTextStyle: const TextStyle(color: Pallete.whiteColor),
                   hintStyle: const TextStyle(color: Pallete.whiteColor),
-                  controller: phonecontroller,
+                  controller: _phonecontroller,
                   keyboardType: TextInputType.phone,
                   prefixIcon:
                       const Icon(Icons.phone, color: Pallete.whiteColor),
@@ -163,7 +201,9 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 const SizedBox(height: 10),
                 GradientButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    signup(_emailcontroller.text, _passwordcontroller.text, _confirmpasswordcontroller.text, _phonecontroller.text);
+                  },
                 ),
                 const SizedBox(height: 10),
                 Column(

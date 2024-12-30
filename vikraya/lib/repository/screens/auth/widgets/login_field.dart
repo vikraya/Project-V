@@ -24,7 +24,6 @@ class LoginField extends StatefulWidget {
     this.hintStyle,
     required int width,
     required int height,
-    required TextStyle hintTextStyle,
   });
 
   @override
@@ -59,7 +58,12 @@ class _LoginFieldState extends State<LoginField> {
               ),
               borderRadius: BorderRadius.circular(10),
             ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(color: Colors.red, width: 3),
+            ),
             hintText: widget.hintText,
+            hintStyle: widget.hintStyle,
             suffixIcon: widget.suffixIcon,
             prefixIcon: widget.prefixIcon,
             errorBorder: OutlineInputBorder(

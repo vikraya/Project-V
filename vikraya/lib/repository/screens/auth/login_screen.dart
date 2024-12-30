@@ -4,6 +4,8 @@ import 'package:vikraya/repository/screens/auth/signup_screen.dart';
 import 'package:vikraya/repository/screens/auth/widgets/gradient_button.dart';
 import 'package:vikraya/repository/screens/auth/widgets/login_field.dart';
 import 'package:vikraya/repository/screens/auth/widgets/social_button.dart';
+import 'package:vikraya/repository/screens/main_screen.dart';
+import 'package:vikraya/services/auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -17,6 +19,51 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordController = TextEditingController();
   bool _isPasswordVisible = true;
   bool _isLoginEnabled = false;
+
+  void login(String userid, String password) async {
+ // Validating details if they are empty or not
+  if (userid.isEmpty || password.isEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("Please enter both email and password")),
+    );
+    return;
+  }
+
+  AuthService authService = AuthService('http://localhost:8000');
+
+  try {
+    final response = await authService.logIn(userid, password);
+
+    if (!mounted) return; // Ensure widget is still in the tree
+    
+    if (response['message'] == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Unexpected error occurred. Please try again.")),
+      );
+      
+      return;
+    }
+
+    if (response['message'] == "Login successful") {
+      // Navigate to the next screen 
+      Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MainScreen()),
+        );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(response['message'])),
+      );
+    }
+  } catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("An error occurred: ${e.toString()}")),
+    );
+    print("Login error: $e");
+  }
+}
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -68,7 +115,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 30,
                   width: 150,
                   hintText: 'Email',
-                  hintTextStyle: TextStyle(color: Pallete.whiteColor),
                   hintStyle: const TextStyle(color: Pallete.whiteColor),
                   controller: _useridController,
                   keyboardType: TextInputType.emailAddress,
@@ -90,7 +136,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 20,
                   width: 150,
                   hintText: 'Password',
-                  hintTextStyle: const TextStyle(color: Pallete.whiteColor),
                   hintStyle: const TextStyle(color: Pallete.whiteColor),
                   controller: _passwordController,
                   keyboardType: TextInputType.visiblePassword,
@@ -160,7 +205,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 10),
                 GradientButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    login(_useridController.text, _passwordController.text);
+                  },
                 ),
               ],
             ),

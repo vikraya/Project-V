@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:vikraya/repository/screens/auth/pallete.dart';
-import 'package:vikraya/repository/screens/main_screen.dart';
 
 class GradientButton extends StatefulWidget {
+  final void Function() onPressed;
+
   const GradientButton({
     super.key,
-    required onPressed,
+    required this.onPressed,
   });
 
   @override
@@ -31,10 +32,7 @@ class _GradientButtonState extends State<GradientButton> {
         borderRadius: BorderRadius.circular(7),
       ),
       child: ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => MainScreen()));
-        },
+        onPressed: widget.onPressed,
         style: ElevatedButton.styleFrom(
           fixedSize: const Size(250, 55),
           backgroundColor: Colors.transparent,
