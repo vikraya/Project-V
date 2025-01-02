@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:vikraya/domain/constants/appcolors.dart';
 import 'package:vikraya/repository/screens/cart/le_cart_screen.dart';
 import 'package:vikraya/repository/screens/favourite/le_favourite_page.dart';
+import 'package:vikraya/repository/screens/home/homescreen.dart';
 import 'package:vikraya/repository/screens/home/le_home_screen.dart';
+import 'package:vikraya/repository/screens/main_screen.dart';
 import 'package:vikraya/repository/screens/payment/payment_screen.dart';
 import 'package:vikraya/repository/screens/profile/profile_screens.dart';
 
@@ -59,17 +61,25 @@ class _LeBnsState extends State<LeBns> {
           index: _currentIndex,
           children: _screens,
         ),
-        bottomNavigationBar: CurvedNavigationBar(
-          height: 50,
-          backgroundColor: Colors.black,
-          color: AppColors.bottomNavigationBarColorLe,
-          index: _currentIndex,
-          onTap: (index) {
+        bottomNavigationBar: GestureDetector(
+          onDoubleTap: () {
             setState(() {
-              _currentIndex = index;
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => MainScreen()));
             });
           },
-          items: _navigationItem,
+          child: CurvedNavigationBar(
+            height: 50,
+            backgroundColor: Colors.black,
+            color: AppColors.bottomNavigationBarColorLe,
+            index: _currentIndex,
+            onTap: (index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
+            items: _navigationItem,
+          ),
         ));
   }
 }

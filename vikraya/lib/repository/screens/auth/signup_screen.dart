@@ -29,7 +29,7 @@ class _SignupScreenState extends State<SignupScreen> {
       return;
     }
     
-    AuthService authService = AuthService('http://localhost:8000');
+    AuthService authService = AuthService('http://192.168.0.2:8000');
     try {
       final response = await authService.signUp(email, password, confirmPassword, phone);
       if (!mounted) return; // Ensure widget is still in the tree

@@ -3,7 +3,6 @@ import 'package:vikraya/domain/constants/appcolors.dart';
 import 'package:vikraya/repository/screens/bottom_nav/bottom_nav_screen.dart';
 import 'package:vikraya/repository/screens/categories/categories_list_grid.dart';
 
-
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
@@ -17,7 +16,7 @@ class _MainScreenState extends State<MainScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(50),
+          preferredSize: Size.fromHeight(50.0),
           child: AppBarMS(context),
         ),
         backgroundColor: AppColors.scaffoldBackground,

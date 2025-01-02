@@ -19,7 +19,7 @@ class _SplashscreenState extends State<Splashscreen> {
     super.initState();
     Timer(Duration(seconds: 2), () {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => SignupScreen()));
+          context, MaterialPageRoute(builder: (context) => MainScreen()));
     });
   }
 
@@ -27,15 +27,17 @@ class _SplashscreenState extends State<Splashscreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.scaffoldBackground,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: Container(
-              child: Uihelper.CoustomImagess(img: "VOnC ss.gif"),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
+              child: Container(
+                child: Uihelper.CoustomImagess(img: "VOnC ss.gif"),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

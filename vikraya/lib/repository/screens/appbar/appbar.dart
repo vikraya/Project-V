@@ -22,7 +22,7 @@ class _AppbarHState extends State<AppbarH> {
             img: "V_O_n_C_Logo crop-min.png", height: 30, width: 50),
         const SizedBox(width: 2),
         Container(
-            height: 40,
+            height: 60,
             width: MediaQuery.of(context).size.width * 0.542,
             decoration: BoxDecoration(
               color: Colors.grey.shade900.withOpacity(0.5),

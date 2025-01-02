@@ -21,48 +21,48 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _isLoginEnabled = false;
 
   void login(String userid, String password) async {
- // Validating details if they are empty or not
-  if (userid.isEmpty || password.isEmpty) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text("Please enter both email and password")),
-    );
-    return;
-  }
-
-  AuthService authService = AuthService('http://localhost:8000');
-
-  try {
-    final response = await authService.logIn(userid, password);
-
-    if (!mounted) return; // Ensure widget is still in the tree
-    
-    if (response['message'] == null) {
+    // Validating details if they are empty or not
+    if (userid.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Unexpected error occurred. Please try again.")),
+        SnackBar(content: Text("Please enter both email and password")),
       );
-      
       return;
     }
 
-    if (response['message'] == "Login successful") {
-      // Navigate to the next screen 
-      Navigator.push(
+    AuthService authService = AuthService('http://192.168.0.2:8000');
+
+    try {
+      final response = await authService.logIn(userid, password);
+
+      if (!mounted) return; // Ensure widget is still in the tree
+
+      if (response['message'] == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text("Unexpected error occurred. Please try again.")),
+        );
+
+        return;
+      }
+
+      if (response['message'] == "Login successful") {
+        // Navigate to the next screen
+        Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => MainScreen()),
         );
-    } else {
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(response['message'])),
+        );
+      }
+    } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(response['message'])),
+        SnackBar(content: Text("An error occurred: ${e.toString()}")),
       );
+      print("Login error: $e");
     }
-  } catch (e) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text("An error occurred: ${e.toString()}")),
-    );
-    print("Login error: $e");
   }
-}
-
 
   @override
   Widget build(BuildContext context) {
@@ -118,8 +118,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   hintStyle: const TextStyle(color: Pallete.whiteColor),
                   controller: _useridController,
                   keyboardType: TextInputType.emailAddress,
-                  prefixIcon:
-                      const Icon(Icons.email_outlined, color: Pallete.whiteColor),
+                  prefixIcon: const Icon(Icons.email_outlined,
+                      color: Pallete.whiteColor),
                   obscureText: false,
                   suffixIcon: null,
                   validator: (value) {

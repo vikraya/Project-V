@@ -7,52 +7,49 @@ import 'package:vikraya/services/auth_service.dart';
 
 class EpnConformationScreen extends StatefulWidget {
   final String email;
-  const EpnConformationScreen({super.key,required this.email});
-
+  const EpnConformationScreen({super.key, required this.email});
 
   @override
   State<EpnConformationScreen> createState() => _EpnConformationScreenState();
 }
 
 class _EpnConformationScreenState extends State<EpnConformationScreen> {
-
   final _otp = TextEditingController();
   // final PhoneNubercontroller = TextEditingController();
   bool _OtpConfirmationScreen = false;
 
-  void confirmSignup(String email,String otp) async {
+  void confirmSignup(String email, String otp) async {
     print(otp);
     print(email);
-    if(otp.isEmpty){
+    if (otp.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("otp field should not be empty"))
-      );
+          SnackBar(content: Text("otp field should not be empty")));
       return;
     }
 
-    AuthService auth = AuthService('http://localhost:8000');
+    AuthService auth = AuthService('http://192.168.0.2:8000');
 
-    try{
+    try {
       final response = await auth.confirmSignup(email, otp);
-       if (!mounted) return; // Ensure widget is still in the tree
+      if (!mounted) return; // Ensure widget is still in the tree
       if (response['message'] == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Unexpected error occurred. Please try again.")),
+          SnackBar(
+              content: Text("Unexpected error occurred. Please try again.")),
         );
         return;
-      } else if(response['message'] == "Confirmation Successful"){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => MainScreen()));
-      }
-      else{
-          ScaffoldMessenger.of(context).showSnackBar(
+      } else if (response['message'] == "Confirmation Successful") {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => MainScreen()));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(response['message'])),
         );
       }
-    }catch(e){
+    } catch (e) {
       print(e);
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -156,13 +153,13 @@ class _EpnConformationScreenState extends State<EpnConformationScreen> {
                 SizedBox(height: 10),
                 Center(
                   child: GradientButton(
-                      onPressed: () {
-                        setState(
-                          () {
-                            confirmSignup(widget.email, _otp.text);
-                          },
-                        );
-                      },
+                    onPressed: () {
+                      setState(
+                        () {
+                          confirmSignup(widget.email, _otp.text);
+                        },
+                      );
+                    },
                   ),
                 ),
               ],
