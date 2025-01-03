@@ -514,7 +514,6 @@ class _LeCategoriesListGridState extends State<LeCategoriesListGrid> {
 }
 
 Widget AppBarLe(BuildContext context) {
-  double height = MediaQuery.of(context).size.height;
   double width = MediaQuery.of(context).size.width;
   return AppBar(
     toolbarHeight: 50,

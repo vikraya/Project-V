@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:vikraya/repository/screens/auth/pallete.dart';
 import 'package:vikraya/repository/screens/auth/signup_screen.dart';
 import 'package:vikraya/repository/screens/auth/widgets/gradient_button.dart';
@@ -15,10 +16,21 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  // GoogleSignIn signIn = GoogleSignIn();
+  //
+  // Future<void> GoogleSignin() async {
+  //   try {
+  //     var user = await signIn.signIn();
+  //     print(user);
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
+
   final _useridController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _isPasswordVisible = true;
-  bool _isLoginEnabled = false;
+  bool _isLoginEnabled = true;
 
   void login(String userid, String password) async {
     // Validating details if they are empty or not
@@ -44,6 +56,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
         return;
       }
+      setState(() {
+        _isLoginEnabled = true;
+      });
 
       if (response['message'] == "Login successful") {
         // Navigate to the next screen
@@ -100,7 +115,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   label: 'Continue with Google',
                   horizontalPadding: 30,
                   verticalPadding: 5,
-                  onPressed: () {},
+                  onPressed: () {
+                    //GoogleSignin();
+                  },
                 ),
                 const SizedBox(height: 11),
                 const Text(
@@ -174,8 +191,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     InkWell(
                       onTap: () {
+                        _isLoginEnabled = false;
                         setState(() {
-                          _isLoginEnabled = true;
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
@@ -206,7 +223,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 10),
                 GradientButton(
                   onPressed: () {
-                    login(_useridController.text, _passwordController.text);
+                    _isLoginEnabled
+                        ? login(
+                            _useridController.text, _passwordController.text)
+                        : null;
                   },
                 ),
               ],

@@ -512,7 +512,6 @@ class _FoodsCategoriesListGridState extends State<FoodsCategoriesListGrid> {
 }
 
 Widget AppBarFS(BuildContext context) {
-  double height = MediaQuery.of(context).size.height;
   double width = MediaQuery.of(context).size.width;
   return AppBar(
     toolbarHeight: 50,

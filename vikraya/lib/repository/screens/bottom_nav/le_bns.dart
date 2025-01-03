@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:vikraya/domain/constants/appcolors.dart';
 import 'package:vikraya/repository/screens/cart/le_cart_screen.dart';
 import 'package:vikraya/repository/screens/favourite/le_favourite_page.dart';
-import 'package:vikraya/repository/screens/home/homescreen.dart';
 import 'package:vikraya/repository/screens/home/le_home_screen.dart';
 import 'package:vikraya/repository/screens/main_screen.dart';
 import 'package:vikraya/repository/screens/payment/payment_screen.dart';
@@ -19,7 +18,7 @@ class LeBns extends StatefulWidget {
 class _LeBnsState extends State<LeBns> {
   int _currentIndex = 0;
 
-  List<Widget> _screens = [
+ final List<Widget> _screens = [
     LeHomeScreen(),
     LeFavouritePage(),
     PaymentScreen(),

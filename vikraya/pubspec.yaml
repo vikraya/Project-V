@@ -40,6 +40,7 @@ dependencies:
   carousel_slider: ^5.0.0
   icons_plus: ^5.0.0
   http: ^1.2.2
+  google_sign_in: ^6.2.2
 
 dev_dependencies:
   flutter_test:
@@ -73,7 +74,6 @@ flutter:
     - assets/img/living_generals/
     - assets/img/cevices/
     - assets/img/vonc_io/
-    - assets/fonts/
     - assets/icons/
     - assets/videos/gifs/
 

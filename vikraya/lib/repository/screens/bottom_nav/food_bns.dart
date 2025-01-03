@@ -17,7 +17,7 @@ class FoodBns extends StatefulWidget {
 class _FoodBnsState extends State<FoodBns> {
   int _currentIndex = 0;
 
-  List<Widget> _screens = [
+  final List<Widget> _screens = [
     FoodsHomeScreen(),
     FoodsFavouritePage(),
     PaymentScreen(),

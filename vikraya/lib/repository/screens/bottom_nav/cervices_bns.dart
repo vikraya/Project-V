@@ -17,7 +17,7 @@ class CervicesBns extends StatefulWidget {
 class _CervicesBnsState extends State<CervicesBns> {
     int _currentIndex = 0;
 
-  List<Widget> _screens = [
+   final List<Widget> _screens = [
     CervicesHomeScreen(),
     CervicesFavouritepage(),
     PaymentScreen(),

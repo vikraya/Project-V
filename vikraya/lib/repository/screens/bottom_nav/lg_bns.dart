@@ -17,7 +17,7 @@ class LgBns extends StatefulWidget {
 class _LgBnsState extends State<LgBns> {
       int _currentIndex = 0;
 
-  List<Widget> _screens = [
+   final List<Widget> _screens = [
     LgHomeScreen(),
     LgFavourite(),
     PaymentScreen(),
